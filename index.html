@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estimate</title>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<style>
+body {
+  font-family: Arial;
+  background:#f2f2f2;
+  margin:0;
+  padding:10px;
+  overflow-x:auto;
+}
+
+/* paper layout */
+.sheet {
+  background:white;
+  padding:20px;
+  border:2px solid black;
+  line-height:1.6;
+  width:900px;
+  margin:auto;
+}
+
+/* headings */
+h1 { text-align:center; color:red; margin:5px; }
+h3 { text-align:center; margin:2px; }
+.center { text-align:center; }
+
+/* inputs */
+input, select {
+  border:none;
+  border-bottom:1px dotted black;
+  font-size:14px;
+  font-weight:bold;
+  padding:3px;
+}
+
+/* FIX dropdown width */
+select {
+  min-width:120px;
+  max-width:200px;
+}
+
+.small { width:80px; }
+.wide { width:140px; }
+
+/* table */
+table {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+table, th, td {
+  border:1px solid black;
+}
+
+th, td {
+  padding:10px;
+  font-size:14px;
+  vertical-align:top;
+}
+
+/* buttons */
+button {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  background:green;
+  color:white;
+  border:none;
+  font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sheet" id="bill">
+
+<h1>RADHIKA ENTERPRISES</h1>
+<h3>DEALING IN : MULTI BRAND SUBMERSIBLE PUMPS</h3>
+
+<p class="center">
+Shop No. 12, Vinay Nagar Shopping Complex,<br>
+Santoshnagar 'X' Road, HYDERABAD - 500 059.<br>
+Cell : 9440033848
+</p>
+
+<h3>ESTIMATE</h3>
+
+Date: <input type="date"><br><br>
+
+<!--  TOP SECTION FIXED -->
+<div style="display:flex; justify-content:space-between; gap:20px; align-items:flex-start;">
+
+<!-- LEFT SIDE -->
+<div>
+Borewell Dia:
+<select class="wide">
+<option>4 1/2"</option>
+<option>6 1/2"</option>
+</select>
+
+<br><br>
+
+Borewell Depth:
+<input id="depthFt" class="small" oninput="convert('depthFt','depthM')"> ft
+(<span id="depthM">0</span> m)
+
+<br><br>
+
+Yield:
+<input id="yieldFt" class="small" oninput="convert('yieldFt','yieldM')"> ft
+(<span id="yieldM">0</span> m)
+</div>
+
+<!-- RIGHT SIDE -->
+<div>
+Water Touched:
+<input id="waterFt" class="small" oninput="convert('waterFt','waterM')"> ft
+(<span id="waterM">0</span> m)
+
+<br><br>
+
+Present water level:
+<input id="presentFt" class="small" oninput="convert('presentFt','presentM')"> ft
+(<span id="presentM">0</span> m)
+
+<br><br>
+
+Delivery Head:
+<input class="wide">
+</div>
+
+</div>
+
+<table>
+
+<tr>
+<th>No</th>
+<th>Particulars</th>
+<th>Qty</th>
+<th>Amount</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>
+<select>
+<option>0.5</option><option>0.75</option><option>1</option>
+<option>1.5</option><option>2</option><option>2.5</option>
+<option>3</option><option>4</option><option>5</option>
+</select> HP
+
+<input class="small"> Stages
+
+<select class="wide">
+<option>TEXMO (AQUATEX)</option>
+<option>CRI</option>
+<option>AMBUJA (ASMP)</option>
+<option>TORMAC</option>
+<option>TARO</option>
+</select> Make
+
+<select>
+<option>Single Phase</option>
+<option>Three Phase</option>
+</select>
+
+<select>
+<option>3"</option>
+<option>4"</option>
+<option>6"</option>
+</select>
+
+<br>SUBMERSIBLE PUMP SET
+</td>
+<td><input class="small"></td>
+<td><input id="pump"></td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>
+Control Panel
+<select>
+<option>Vikrant</option>
+<option>Gokul</option>
+<option>Powersun</option>
+</select>
+</td>
+<td><input class="small"></td>
+<td><input id="panel"></td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>
+<input class="small"> HDPE pipe
+<select class="small">
+<option>10</option>
+<option>12.5</option>
+<option>16</option>
+</select> kg/cm²
+<input class="small"> Make
+<input id="pipeRate" class="small"> per mt
+</td>
+<td><input id="pipeQty" class="small"> meters</td>
+<td><input id="pipeAmt"></td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>SS Nipples, SS Nut Bolts, Clips & Nipples Fixing</td>
+<td><input class="small"></td>
+<td><input id="ss"></td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>
+Three Core Flat Cable
+<input class="wide"> Make
+<select class="small">
+<option>1.5</option>
+<option>2.5</option>
+<option>4</option>
+<option>6</option>
+</select> sq.mm.
+<input id="cableRate" class="small"> Rate per mt
+</td>
+<td><input id="cableQty" class="small"> meters</td>
+<td><input id="cableAmt"></td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>Clamps, Bore Cover, Nut Bolts, Blend etc.</td>
+<td><input class="small"></td>
+<td><input id="clamps"></td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>Erection Charges</td>
+<td><input class="small"></td>
+<td><input id="erection"></td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>Transport</td>
+<td><input class="small"></td>
+<td><input id="transport"></td>
+</tr>
+
+<tr>
+<td colspan="3"><b>Total Amount</b></td>
+<td><input id="total"></td>
+</tr>
+
+</table>
+
+<p style="text-align:right">For RADHIKA ENTERPRISES</p>
+
+</div>
+
+<button onclick="calculate()">Calculate</button>
+<button onclick="downloadImage()">Download Image</button>
+<button onclick="shareImage()">Share (WhatsApp)</button>
+
+<script>
+function convert(ftId, mId){
+ let ft = document.getElementById(ftId).value;
+ let m = ft * 0.3048;
+ document.getElementById(mId).innerText = m.toFixed(2);
+}
+
+function calculate(){
+ let pipeAmt = pipeQty.value * pipeRate.value || 0;
+ document.getElementById("pipeAmt").value = pipeAmt;
+
+ let cableAmt = cableQty.value * cableRate.value || 0;
+ document.getElementById("cableAmt").value = cableAmt;
+
+ let total =
+ (Number(pump.value)||0) +
+ (Number(panel.value)||0) +
+ pipeAmt +
+ cableAmt +
+ (Number(ss.value)||0) +
+ (Number(clamps.value)||0) +
+ (Number(erection.value)||0) +
+ (Number(transport.value)||0);
+
+ document.getElementById("total").value = total;
+}
+
+async function downloadImage(){
+ const canvas = await html2canvas(document.getElementById("bill"), {scale:2});
+ const link = document.createElement("a");
+ link.download = "estimate.png";
+ link.href = canvas.toDataURL();
+ link.click();
+}
+
+async function shareImage(){
+ const canvas = await html2canvas(document.getElementById("bill"), {scale:2});
+ canvas.toBlob(async (blob)=>{
+   const file = new File([blob], "estimate.png", {type:"image/png"});
+   if (navigator.canShare && navigator.canShare({files:[file]})) {
+     await navigator.share({files:[file], title:"Estimate"});
+   } else {
+     alert("Use Download button");
+   }
+ });
+}
+</script>
+
+</body>
+</html>
